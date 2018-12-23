@@ -66,22 +66,22 @@ submission 3: 594515.34 (17) → 612351.63 (12)
 最初に receiveMessage(n, s1) の引数として与えられる文字列 s1 を有効活用できればうれしい  
 削除を含まない(位置ズレのない)文字列 s2 を得るためには 
 ```cpp
-	for (int i = start; i < end; i++) {
-		while (true) {
-			string ch = Sender::getMessage(i, 1);
-			if (!ch.empty()) {
-				s2 += ch;
-				break;
-			}
+for (int i = start; i < end; i++) {
+	while (true) {
+		string ch = Sender::getMessage(i, 1);
+		if (!ch.empty()) {
+			s2 += ch;
+			break;
 		}
 	}
+}
 ```
 のように empty 以外が出るまで一文字ずつ取得していけば良い  
 これは error_rate = 0.5 でもせいぜい n + 数百程度のコストで済む
 
 s2 が得られたら s1 の適切な位置に空白を挿入して s1 の位置ズレを修正していく  
 ```cpp
-	sim[i] = (s1[i] == s2[i]) ? 1 : -1  
+sim[i] = (s1[i] == s2[i]) ? 1 : -1  
 ```
 とした後に累積和を取ってみる  
 
