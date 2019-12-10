@@ -263,3 +263,8 @@ __pycache__/
 MM103
 .vscode
 .gitattributes
+*submissions.db
+*SubmissionViewer.py
+*submit.py
+HHMM2019C
+KaggleSanta2019

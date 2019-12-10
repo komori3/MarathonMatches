@@ -409,7 +409,7 @@ public:
   }
 };
 
-int main() {
+int _main() {
 
   GlowingBacteria gb;
   int N;
@@ -429,6 +429,63 @@ int main() {
   for (int i = 0; i < ret.size(); i++)
     cout << ret[i] << endl;
   cout.flush();
+
+  return 0;
+}
+
+
+int getNextColor(const vector<int>& v) {
+  map<int, int> colorMap;
+  for (int i = 1; i < v.size(); i++) colorMap[v[i]]++;
+  if (colorMap.size() == 1) return colorMap.begin()->first;
+  vector<pii> colors;
+  for (auto& e : colorMap) colors.push_back(e);
+  sort(colors.begin(), colors.end(), [](const pii& a, const pii& b) {
+    return a.second < b.second;
+  });
+  return colors[0].second == colors[1].second ? v[0] : colors[0].first;
+}
+
+template <typename T = int>
+T ipow(T x, T n) {
+  T ret = 1;
+  for (T i = 0; i < n; i++) ret *= x;
+  return ret;
+}
+
+template <typename _Ty> ostream& operator << (ostream& o, const vector<_Ty>& v) { if (v.empty()) { o << ""; return o; } o << "" << v.front(); for (auto itr = ++v.begin(); itr != v.end(); itr++) { o << "," << *itr; } o << ""; return o; }
+
+int main() {
+  const int C = 4, K = 5;
+  // S^5 -> S
+  int N = ipow(C, K);
+
+  vector<vector<vector<int>>> a(K, vector<vector<int>>(C, vector<int>(C, 0)));
+  
+  for (int i = 0; i < N; i++) {
+    int M(i);
+    vector<int> v;
+    for (int j = 0; j < K; j++) {
+      v.push_back(M % C);
+      M /= C;
+    }
+    reverse(v.begin(), v.end());
+    int c = getNextColor(v);
+    cerr << v << "->" << c << (i % 24 == 23 ? "\n" : ", ");
+
+    for (int k = 0; k < K; k++) {
+      a[k][c][v[k]]++;
+    }
+  }
+
+  cerr << endl;
+
+  for (auto& v : a) {
+    for (auto& vv : v) {
+      cerr << vv << endl;
+    }
+    cerr << endl;
+  }
 
   return 0;
 }

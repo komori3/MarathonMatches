@@ -10,7 +10,7 @@ def nCk(n, k):
     if n < k:
         return 0
     return factorial(n) // factorial(n - k) // factorial(k)
-    
+
 def nPk(n, k):
     if n < k:
         return 0
@@ -96,6 +96,9 @@ def getProbabilities(N, C):
     p10 = C ** N - x * (C - 1)
     p11 = x
 
+    print(x, y, z)
+    print(p00, p01, p10, p11)
+
     p00 /= C ** N
     p01 /= C ** N
     p10 /= C ** N
@@ -106,7 +109,8 @@ def getProbabilities(N, C):
 
     print(line)
 
+getProbabilities(5, 5)
 
-for N in range(2, 37):
-    for C in range(2, 9):
-        getProbabilities(N, C)
+# for N in range(2, 37):
+#     for C in range(2, 9):
+#         getProbabilities(N, C)
