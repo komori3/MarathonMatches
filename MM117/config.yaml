@@ -1,0 +1,18 @@
+tools:
+  path: ../../tools/
+name: "RotatingNumbers"
+paths:
+  source: "./src/{name}.cpp"
+  target: "./bin/{name}.out"
+  tester: "./bin/tester.jar"
+build:
+  cmd: "g++ -std=gnu++11 -O3 {source} -o {target}"
+tester: 
+  cmd: "java -jar {tester} -exec {target} -novis -seed {seed}"
+  num_procs: 8
+  seed:
+    num_seeds: 100
+    seed_begin: 1
+evaluator: "less"
+workspace: 
+  name: "wks"
